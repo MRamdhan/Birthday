@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun Sisilia</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Comic Sans MS', sans-serif;
+            background-color: #ffe6f0;
+            color: #ff66b2;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            color: #ff3399;
+            font-family: 'Pacifico', cursive;
+            margin-bottom: 1rem;
+        }
+        
+        .message {
+            background: #ffb3d9;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        button {
+            margin-top: 1rem;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #ffffff;
+            background-color: #ff66b2;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background-color: #ff3399;
+        }
+        /* Pop-up Kartu Ucapan */
+        
+        .card {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 300px;
+            background: rgba(255, 182, 193, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        .card.hidden {
+            display: none;
+        }
+        /* Foto Sisilia */
+        
+        .photo {
+            margin-top: 10px;
+            width: 100%;
+            border-radius: 10px;
+            transition: opacity 0.4s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+        }
+        /* Tampilkan foto dengan animasi */
+        
+        .card:not(.hidden) .photo {
+            opacity: 1;
+        }
+        
+        #confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ff66b2;
+            animation: fall 4s infinite;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        /* Efek hati melayang */
+        
+        @keyframes heart-float {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Efek Confetti -->
+    <div id="confetti"></div>
+
+    <header class="header">
+        <h1>🎂 Selamat Ulang Tahun, Bebeppp! 🎂</h1>
+    </header>
+
+    <section class="message">
+        <p>🎈 Hari ini hari istimewa bebepp hari spesial bebepp🎈</p>
+        <button onclick="displayGift()">Buka Hadiah 🎁</button>
+    </section>
+
+    <!-- Pop-up Kartu Ucapan dengan Foto Sisilia -->
+    <div id="card" class="card hidden">
+        <h2>🎉 Selamat Ulang Tahun, Sisilia! 🎉</h2>
+        <p>Semoga di umur yg sekarang bisa jadi lebih baik ya sayangg i love uu</p>
+        <img src="bebep.jpeg" alt="Foto Sisilia" class="photo">
+        <h4>Haidah benerannya nyusull yaa sayangg heheheh</h4>
+        <button onclick="closeCard()">Tutup Kartu</button>
+    </div>
+    <script>
+        // Efek Confetti
+        function createConfetti() {
+            const confettiContainer = document.getElementById('confetti');
+            for (let i = 0; i < 100; i++) {
+                const confettiPiece = document.createElement('div');
+                confettiPiece.classList.add('confetti-piece');
+                confettiPiece.style.left = `${Math.random() * 100}%`;
+                confettiPiece.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 70%)`;
+                confettiContainer.appendChild(confettiPiece);
+            }
+        }
+
+        createConfetti();
+
+        // Fungsi untuk menampilkan hadiah
+        function displayGift() {
+            const card = document.getElementById('card');
+            card.classList.remove('hidden'); // Tampilkan kartu
+            card.style.opacity = '1'; // Atur opacity ke 1 untuk transisi
+            card.style.transform = 'translate(-50%, -50%) scale(1)'; // Atur skala ke 1 untuk tampilan penuh
+        }
+
+        // Fungsi untuk menutup kartu ucapan
+        function closeCard() {
+            const card = document.getElementById('card');
+            card.style.opacity = '0'; // Atur opacity ke 0 untuk menyembunyikan
+            card.style.transform = 'translate(-50%, -50%) scale(0.8)'; // Perkecil kartu untuk efek
+            setTimeout(() => {
+                card.classList.add('hidden'); // Sembunyikan kartu setelah animasi selesai
+            }, 300);
+        }
+    </script>
+</body>
+
+</html>
